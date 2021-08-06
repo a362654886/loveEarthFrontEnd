@@ -41,7 +41,7 @@ const UserVolunteerManagement = (): JSX.Element => {
   }, [page]);
 
   useEffect(() => {
-    console.log(user);
+    //console.log(user);
   }, [update]);
 
   const updateVolunteer = async (volunteer: VolunteerType) => {
@@ -70,11 +70,8 @@ const UserVolunteerManagement = (): JSX.Element => {
       page,
       pageSize
     );
-    console.log(users);
     if (users) {
-      console.log(users[0]);
       setUsers(users[0]);
-      console.log(user);
     }
     setLoading(false);
     const n = update + 1;

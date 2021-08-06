@@ -12,6 +12,5 @@ export const ifUserExist = (
       }
     });
   }
-  console.log(result)
   return result;
 };

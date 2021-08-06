@@ -52,10 +52,8 @@ const EmailEditModel = ({ childRef, emails }: IProps): JSX.Element => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    console.log(emails);
     let newEmailsString = "";
     emails.forEach((email) => {
-      console.log(email);
       newEmailsString += `${email},`;
     });
     setEmails(newEmailsString);

@@ -52,7 +52,7 @@ const UsersTable = (): JSX.Element => {
   }, [selectAll, users]);
 
   useEffect(() => {
-    console.log(emails);
+    //console.log(emails);
   }, [emails]);
 
   const childrenRef: React.MutableRefObject<{ popUp: () => void }> =
@@ -93,10 +93,6 @@ const UsersTable = (): JSX.Element => {
 
   const Edit = () => {
     childrenRef.current.popUp();
-  };
-
-  const showDetail = (user: User) => {
-    console.log(user);
   };
 
   const getVolunteerString = (volunteer: VolunteerType) => {

@@ -62,7 +62,9 @@ const EventShowModel = ({ childRef, propEvent }: IProps): JSX.Element => {
   useEffect(() => {
     if (propEvent?.users) {
       const editUsers = (propEvent?.users as User[][]).map((user, index) => {
-        user[0].editHour = false;
+        if (user[0]) {
+          user[0].editHour = false;
+        }
         return user;
       });
       propEvent.users = editUsers;
@@ -76,7 +78,7 @@ const EventShowModel = ({ childRef, propEvent }: IProps): JSX.Element => {
   }, [update]);
 
   useEffect(() => {
-    console.log(allHours);
+    //console.log(allHours);
   }, [allHours]);
 
   useImperativeHandle(childRef, () => ({
@@ -84,35 +86,39 @@ const EventShowModel = ({ childRef, propEvent }: IProps): JSX.Element => {
   }));
 
   const getUsersTable = (userArr: User[][]) => {
-    return userArr.map((users, index) => {
-      return (
-        <EventUserDiv key={index}>
-          <div>
-            <h6>Name: </h6>
-            <p>
-              {users[0] ? users[0].firstName : ""},
-              {users[0] ? users[0].lastName : ""}
-            </p>
-          </div>
-          <div>
-            <h6>Email: </h6>
-            <p>{users[0] ? users[0].userEmail : ""}</p>
-          </div>
-          <div>
-            <h6>Hours: </h6>
-            <p>{allHours[0] ? allHours[0] : 0}</p>
-            {getButton(users[0].editHour, users[0], index)}
-          </div>
-        </EventUserDiv>
-      );
-    });
+    if (userArr[0][0] != undefined) {
+      return userArr.map((users, index) => {
+        return (
+          <EventUserDiv key={index}>
+            <div>
+              <h6>Name: </h6>
+              <p>
+                {users[0] ? users[0].firstName : ""},
+                {users[0] ? users[0].lastName : ""}
+              </p>
+            </div>
+            <div>
+              <h6>Email: </h6>
+              <p>{users[0] ? users[0].userEmail : ""}</p>
+            </div>
+            <div>
+              <h6>Hours: </h6>
+              <p>{allHours ? allHours[0] : 0}</p>
+              {getButton(users[0], index)}
+            </div>
+          </EventUserDiv>
+        );
+      });
+    } else {
+      return <p>no volunteers</p>;
+    }
   };
 
   const onChange = (e: React.ChangeEvent<Element>): void =>
     setSaveHour((e.target as HTMLInputElement).value);
 
-  const getButton = (show: boolean | undefined, user: User, index: number) => {
-    if (show) {
+  const getButton = (user: User, index: number) => {
+    if (user && user.editHour) {
       return (
         <>
           <InputBody onChange={onChange} value={saveHour} />
@@ -169,6 +175,14 @@ const EventShowModel = ({ childRef, propEvent }: IProps): JSX.Element => {
     }
   };
 
+  const getVolunteerLength = (users: User[][]) => {
+    if (users[0][0] != undefined) {
+      return users.length;
+    } else {
+      return 0;
+    }
+  };
+
   return (
     <>
       <PoPup show={show} onHide={handleClose}>
@@ -191,7 +205,10 @@ const EventShowModel = ({ childRef, propEvent }: IProps): JSX.Element => {
               <h6>Introduction:</h6>
               <p>{event == null ? "" : event.introduction}</p>
             </EventIntroduceDiv>
-            <h6>Volunteers: {event ? (event.users as User[][]).length : 0}</h6>
+            <h6>
+              Volunteers:{" "}
+              {event ? getVolunteerLength(event.users as User[][]) : 0}
+            </h6>
             <EventVolunteerDiv>
               <div>
                 {event == null ? "" : getUsersTable(event.users as User[][])}

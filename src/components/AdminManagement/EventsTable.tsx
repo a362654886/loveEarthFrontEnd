@@ -38,7 +38,6 @@ const EventsTable = (): JSX.Element => {
     setLoading(true);
     //get all plate
     const events: EventType[] | null = await eventQuery(page, pageSize);
-    console.log(events);
     setEvents(events);
     setLoading(false);
   };
@@ -46,7 +45,6 @@ const EventsTable = (): JSX.Element => {
   const newPage = async (page: number) => setPage(page);
 
   const showDetail = (event: EventType) => {
-    console.log(event);
     setEvent(event);
     childrenRef.current.popUp();
   };
