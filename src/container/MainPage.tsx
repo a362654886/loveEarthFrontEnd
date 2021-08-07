@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useRef } from "react";
 import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginType } from "../types/EnumTypes";
 import { IStoreState } from "../types/IStoreState";
 import LoginModel from "../components/Login/LoginModel";
@@ -34,8 +34,13 @@ import {
   ProfileDiv,
 } from "../cssJs/mianPageCss";
 import { User } from "../types/User";
+import { AUTH_START } from "../redux/auth";
+import { LOGIN_USER_NONE } from "../redux/loginUser";
 
 const MainPage = (): JSX.Element => {
+
+  const dispatch = useDispatch();
+
   const loginUser: User | null = useSelector(
     (state: IStoreState) => state.loginUserState
   );
@@ -52,6 +57,18 @@ const MainPage = (): JSX.Element => {
     history.push({
       pathname: `/mainPage/${url}`,
     });
+  };
+
+  const logOut = () => {
+    dispatch({
+      payload: LoginType.AUTHORIZATION,
+      type: AUTH_START
+    });
+    dispatch({
+      payload: null,
+      type: LOGIN_USER_NONE
+    });
+    toProfile("/mainPage/home");
   };
 
   const authState: LoginType = useSelector(
@@ -72,6 +89,11 @@ const MainPage = (): JSX.Element => {
               >
                 Profile
               </LoginButton>
+              <LoginButton
+                onClick={() => logOut()}
+              >
+                Log out
+              </LoginButton>
               <LoginButton onClick={() => toProfile("/adminManagementPage")}>
                 Admin
               </LoginButton>
@@ -79,9 +101,14 @@ const MainPage = (): JSX.Element => {
           );
         } else {
           return (
-            <LoginButton onClick={() => toProfile("/mainPage/userManagement")}>
-              Profile
-            </LoginButton>
+            <ProfileDiv>
+              <LoginButton
+                onClick={() => toProfile("/mainPage/userManagement")}
+              >
+                Profile
+              </LoginButton>
+              <LoginButton onClick={() => logOut()}>Log out</LoginButton>
+            </ProfileDiv>
           );
         }
       case LoginType.LOADING:

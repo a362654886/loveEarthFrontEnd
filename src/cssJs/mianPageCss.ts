@@ -44,9 +44,9 @@ export const MenuButtons = styled.div`
 `;
 
 export const MenuButton = styled(Link)`
-  height: 32px;
-  padding: 0 5px 0 5px;
-  font-size: 20px;
+  height: 35px;
+  padding: 2px 5px 0 5px;
+  font-size: 18px;
   border-radius: ${(props) => props.property};
   width: ${(props) => props.style?.width};
   color: black;
@@ -57,7 +57,7 @@ export const MenuButton = styled(Link)`
 `;
 
 export const MenuSelectButton = styled(DropdownButton)`
-  height: 32px;
+  height: 20px;
   padding: 0 5px 0 5px;
   font-size: 20px;
   border-radius: ${(props) => props.property};
