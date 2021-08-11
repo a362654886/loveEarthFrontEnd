@@ -291,3 +291,16 @@ export const HeaderFont3 = styled.h3`
 export const ContextFont = styled.p`
   font-family: "contextFont";
 `;
+
+export const LinkDiv = styled.div`
+  display: flex;
+`;
+
+export const ImgLogoDiv = styled.div`
+  height: 50px;
+  width: 50px;
+  img {
+    height: 50px;
+    width: 50px;
+  }
+`;

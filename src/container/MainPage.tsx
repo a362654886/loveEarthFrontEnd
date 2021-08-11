@@ -1,13 +1,12 @@
 import * as React from "react";
 import { useEffect, useRef } from "react";
-import { Dropdown, DropdownButton, Spinner } from "react-bootstrap";
+import { Dropdown, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginType } from "../types/EnumTypes";
 import { IStoreState } from "../types/IStoreState";
 import LoginModel from "../components/Login/LoginModel";
 import {
   BackGroundBody,
-  FlexDiv,
   Header,
   LOGO,
   MainBody,
@@ -25,6 +24,7 @@ import {
   HeaderMenu,
   HeaderRow1,
   HeaderRow2,
+  LinkDiv,
   LoginButton,
   Menu,
   MenuButton,
@@ -32,14 +32,21 @@ import {
   MenuSelectButton,
   Profile,
   ProfileDiv,
+  ImgLogoDiv,
 } from "../cssJs/mianPageCss";
 import { User } from "../types/User";
+import Facebook from "../files/icon/facebook.png";
+import Instagram from "../files/icon/instagram.png";
 import { AUTH_START } from "../redux/auth";
 import { LOGIN_USER_NONE } from "../redux/loginUser";
+import { createFromIconfontCN } from "@ant-design/icons";
 
 const MainPage = (): JSX.Element => {
-
   const dispatch = useDispatch();
+
+  const IconFont = createFromIconfontCN({
+    scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
+  });
 
   const loginUser: User | null = useSelector(
     (state: IStoreState) => state.loginUserState
@@ -59,14 +66,18 @@ const MainPage = (): JSX.Element => {
     });
   };
 
+  const toOutSidePage = (url: string) => {
+    window.location.replace(url);
+  };
+
   const logOut = () => {
     dispatch({
       payload: LoginType.AUTHORIZATION,
-      type: AUTH_START
+      type: AUTH_START,
     });
     dispatch({
       payload: null,
-      type: LOGIN_USER_NONE
+      type: LOGIN_USER_NONE,
     });
     toProfile("/mainPage/home");
   };
@@ -89,11 +100,7 @@ const MainPage = (): JSX.Element => {
               >
                 Profile
               </LoginButton>
-              <LoginButton
-                onClick={() => logOut()}
-              >
-                Log out
-              </LoginButton>
+              <LoginButton onClick={() => logOut()}>Log out</LoginButton>
               <LoginButton onClick={() => toProfile("/adminManagementPage")}>
                 Admin
               </LoginButton>
@@ -225,6 +232,26 @@ const MainPage = (): JSX.Element => {
         </FooterPartDiv>
         <FooterPartDiv>
           <HeaderFont>Follow Us</HeaderFont>
+          <LinkDiv>
+            <ImgLogoDiv>
+              <img
+                src={Instagram}
+                onClick={() =>
+                  toOutSidePage(
+                    `https://www.instagram.com/singlesclubnz/?igshid=1i04e1w1ayx92`
+                  )
+                }
+              />
+            </ImgLogoDiv>
+            <ImgLogoDiv>
+              <img
+                src={Facebook}
+                onClick={() =>
+                  toOutSidePage(`https://www.facebook.com/nancy.liu.944023`)
+                }
+              />
+            </ImgLogoDiv>
+          </LinkDiv>
         </FooterPartDiv>
       </FooterDiv>
       <LoginModel childRef={childrenRef} />

@@ -62,8 +62,7 @@ const UserVolunteerManagement = (): JSX.Element => {
     }
   };
 
-  const getUsers = async (page: number, pageSize: number) => {
-    console.log("s")
+  const getUsers = async (page: number, pageSize: number) => { 
     setLoading(true);
     //get all plate
     const users: User[] | null = await userGetEventQuery(

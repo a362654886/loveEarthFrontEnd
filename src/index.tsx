@@ -29,6 +29,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
+        <Route path="/" component={MainPage} />
         <Route path="/mainPage" component={MainPage} />
         <Route path="/adminManagementPage" component={AdminManagement} />
       </Switch>
