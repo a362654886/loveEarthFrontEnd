@@ -266,6 +266,16 @@ export const FooterPartDiv = styled(Footer)`
   }
 `;
 
+export const WeChatDiv = styled.div`
+  width: 100px;
+  margin-top: 1rem;
+  img {
+    height: 100px;
+    width: 100px;
+    text-align: left;
+  }
+`;
+
 //slider
 export const RecommendSlider = styled.div`
   height: 600px;
@@ -294,6 +304,10 @@ export const ContextFont = styled.p`
 
 export const LinkDiv = styled.div`
   display: flex;
+  img {
+    height: 50px;
+    width: 50px;
+  }
 `;
 
 export const ImgLogoDiv = styled.div`

@@ -33,10 +33,12 @@ import {
   Profile,
   ProfileDiv,
   ImgLogoDiv,
+  WeChatDiv,
 } from "../cssJs/mianPageCss";
 import { User } from "../types/User";
 import Facebook from "../files/icon/facebook.png";
 import Instagram from "../files/icon/instagram.png";
+import weChat from "../files/icon/weChat.jpg";
 import { AUTH_START } from "../redux/auth";
 import { LOGIN_USER_NONE } from "../redux/loginUser";
 import { createFromIconfontCN } from "@ant-design/icons";
@@ -252,6 +254,9 @@ const MainPage = (): JSX.Element => {
               />
             </ImgLogoDiv>
           </LinkDiv>
+          <WeChatDiv>
+            <img src={weChat} />
+          </WeChatDiv>
         </FooterPartDiv>
       </FooterDiv>
       <LoginModel childRef={childrenRef} />
