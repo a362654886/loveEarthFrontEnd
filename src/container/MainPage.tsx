@@ -197,6 +197,15 @@ const MainPage = (): JSX.Element => {
                     Contact Us
                   </Dropdown.Item>
                 </MenuSelectButton>
+                <MenuSelectButton
+                  title="NZCL"
+                  style={{ fontFamily: "headerFont" }}
+                  onClick={() => {
+                    window.open(
+                      "https://www.loveeartheducation.com/master-login"
+                    );
+                  }}
+                />
               </MenuButtons>
             </Menu>
             <Profile>{getLoginForm()}</Profile>
